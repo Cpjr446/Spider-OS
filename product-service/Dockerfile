@@ -1,7 +1,7 @@
 # user-service/Dockerfile 
 FROM node:20.9.0-alpine
 
-WORKDIR /Devops-T2/product-service
+WORKDIR /Spider-T2/product-service
 
 COPY package*.json ./
 

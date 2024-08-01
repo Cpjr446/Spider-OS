@@ -1,15 +1,30 @@
 #!/bin/bash
 
-# Pull the latest images
-docker-compose pull
+# Log file location
+LOGFILE="/var/log/deploy.log"
 
-# Stop the running containers
-docker-compose down
+# Redirect stdout and stderr to log file
+exec > >(tee -i $LOGFILE)
+exec 2>&1
 
-# Start the containers with the new images
-docker-compose up -d
+echo "Starting deployment at $(date)"
 
-# Remove unused images
-docker image prune -f
+# Change to the directory where docker-compose.yml is located
+cd /Users/Chand/Desktop/Spider-T2/docker-compose
 
-echo "Deployment completed successfully!"
+# Pull the latest Docker images
+echo "Pulling latest Docker images..."
+if ! docker-compose pull; then
+    echo "Error pulling Docker images. Deployment aborted." >&2
+    exit 1
+fi
+
+# Restart the services with the latest images
+echo "Recreating and restarting services..."
+if ! docker-compose up -d; then
+    echo "Error restarting services. Deployment aborted." >&2
+    exit 1
+fi
+
+echo "Deployment successful at $(date)"
+exit 0
