@@ -10,7 +10,7 @@ exec 2>&1
 echo "Starting deployment at $(date)"
 
 # Change to the directory where docker-compose.yml is located
-cd /Users/Chand/Desktop/Spider-T2/docker-compose
+cd home/chandraprakash/Spider-T2/docker-compose
 
 # Pull the latest Docker images
 echo "Pulling latest Docker images..."
