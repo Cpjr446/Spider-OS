@@ -51,3 +51,32 @@ To set up the CI/CD pipeline:
 ## Deployment Process
 
 The deployment process is automated through the CI/CD pipeline. 
+
+## User Service (Port 3000)
+
+### Create a new user
+curl -X POST http://localhost:3000/users \
+-H "Content-Type: application/json" \
+-d '{"username": "johndoe", "password": "securepassword"}'
+
+curl http://localhost:3000/users/USER_ID
+Replace USER_ID with the actual UUID of the user.
+
+### Product Service (Port 3001)
+Create a new product
+curl -X POST http://localhost:3001/products \
+-H "Content-Type: application/json" \
+-d '{"name": "Sample Product", "price": 19.99}'
+
+Retrieve all products
+curl http://localhost:3001/products
+
+
+### Cart Service (Port 3002)
+Add an item to a user's cart
+curl -X POST http://localhost:3002/cart/USER_ID/add \
+-H "Content-Type: application/json" \
+-d '{"productId": "PRODUCT_ID", "quantity": 2}'
+Replace USER_ID with the actual user ID and PRODUCT_ID with the actual product ID.
+Retrieve a user's cart
+curl http://localhost:3002/cart/USER_ID
